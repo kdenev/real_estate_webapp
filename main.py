@@ -2,7 +2,6 @@ from datetime import date
 from flask import Flask, abort, render_template, redirect, url_for, flash, request
 from flask_bootstrap import Bootstrap5
 from flask_ckeditor import CKEditor
-from flask_gravatar import Gravatar
 from flask_login import UserMixin, login_user, LoginManager, current_user, logout_user
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import relationship, DeclarativeBase, Mapped, mapped_column
@@ -22,7 +21,8 @@ load_dotenv()
 
 def get_locale():
     print(os.environ.get('LANGUAGES'))
-    return request.accept_languages.best_match(os.environ.get('LANGUAGES'))
+    # return request.accept_languages.best_match(['en', 'bg'])
+    return 'bg'
 
 app = Flask(__name__)
 babel = Babel(app, locale_selector=get_locale)
@@ -35,4 +35,4 @@ def index():
     return render_template('index.html')
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5001)
+    app.run(debug=True, port=5005)
