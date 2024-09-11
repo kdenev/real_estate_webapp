@@ -13,7 +13,7 @@ from dotenv import load_dotenv
 # Optional: add contact me email functionality (Day 60)
 # import smtplib
 from flask_babel import Babel
-from flask_babel import _
+from flask_babel import _, gettext
 
 # Load environment variables
 load_dotenv()
@@ -22,7 +22,7 @@ load_dotenv()
 def get_locale():
     print(os.environ.get('LANGUAGES'))
     # return request.accept_languages.best_match(['en', 'bg'])
-    return 'bg'
+    return 'en'
 
 app = Flask(__name__)
 babel = Babel(app, locale_selector=get_locale)
@@ -30,8 +30,10 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 ckeditor = CKEditor(app)
 Bootstrap5(app)
 
+
 @app.route("/")
 def index():
+    flash(gettext('Your post is now live!'))
     return render_template('index.html')
 
 if __name__ == "__main__":

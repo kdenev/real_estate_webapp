@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-09-11 20:59+0200\n"
-"PO-Revision-Date: 2024-09-11 20:49+0200\n"
+"POT-Creation-Date: 2024-09-11 21:39+0200\n"
+"PO-Revision-Date: 2024-09-11 21:40+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: bg\n"
 "Language-Team: bg <LL@li.org>\n"
@@ -17,4 +17,16 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
+
+#: main.py:36
+msgid "Your post is now live!"
+msgstr ""
+
+#: templates/index.html:6
+msgid "Hello world"
+msgstr "Здравейте!!!"
+
+#: templates/index.html:28
+msgid "Home"
+msgstr "Начало"
 
