@@ -26,7 +26,8 @@ def get_locale():
 
 app = Flask(__name__)
 babel = Babel(app, locale_selector=get_locale)
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+# app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+app.config['SECRET_KEY'] = 'secret'
 ckeditor = CKEditor(app)
 Bootstrap5(app)
 
