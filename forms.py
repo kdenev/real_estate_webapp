@@ -1,0 +1,34 @@
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField, PasswordField, IntegerField, SelectField, FileField
+from wtforms.validators import DataRequired
+from flask_ckeditor import CKEditorField
+from flask_babel import _
+
+
+TYPE_CHOICES = [('a', _('Apartment')), ('h', _('House')), ('p', _('Plot'))]
+CURRENCY_CHOICES = [('eur', 'EUR'), ('usd', 'USD'), ('bgn', 'BGN')]
+
+# WTForm for creating a blog post
+class AddPropertyForm(FlaskForm):
+    price = IntegerField(_("Price"), validators=[DataRequired()])
+    currency = SelectField(_("Property Type"), validators=[DataRequired()], choices=CURRENCY_CHOICES)
+    city_lantin = StringField(_("City"), validators=[DataRequired()])
+    city_cyrillic = IntegerField(_("City Cyrillic"), validators=[DataRequired()])
+    area_lantin = IntegerField(_("Area Latin"), validators=[DataRequired()])
+    area_cyrillic = IntegerField(_("Area Cyrillic"), validators=[DataRequired()])
+    type = SelectField(_("Property Type"), validators=[DataRequired()], choices=TYPE_CHOICES)
+    size = IntegerField(_("Size"), validators=[DataRequired()])
+    bedrooms = IntegerField(_("Bedrooms"))
+    bathrooms = IntegerField(_("Bathrooms"))
+    description_en = CKEditorField(_("Description English"))
+    description_bg = CKEditorField(_("Description Bulgarian"), validators=[DataRequired()])
+    description_ru = CKEditorField(_("Description Russian"))
+    pics = FileField(_("Pictures"))
+    submit = SubmitField(_("Add property"))
+
+
+# Create a form to login existing users
+class LoginForm(FlaskForm):
+    username = StringField(_("Username"), validators=[DataRequired()])
+    password = PasswordField(_("Password"), validators=[DataRequired()])
+    submit = SubmitField(_("Login"))

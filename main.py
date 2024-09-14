@@ -14,6 +14,7 @@ from dotenv import load_dotenv
 # import smtplib
 from flask_babel import Babel
 from flask_babel import _, gettext
+from forms import AddPropertyForm, LoginForm
 
 # Load environment variables
 load_dotenv()
