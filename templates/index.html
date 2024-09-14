@@ -1,67 +1,36 @@
-<!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> {{ _('Hello world') }} </title>
-    {{ bootstrap.load_css() }}
-    <link
-    href="{{ url_for('static', filename='css/styles.css') }}"
-    rel="stylesheet"
-  />
-</head>
+{% include "header.html" %}
+
 <body>
- <!-- --------------------------------------------------  -->
-  <div class="container">
- <nav class="navbar navbar-expand-lg bg-body-tertiary rounded fixed-top">
-  <div class="container-fluid">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample11" aria-controls="navbarsExample11" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
-      <a class="navbar-brand" href="{{ url_for('index') }}">
-        <img src="{{ url_for('static', filename='assets/logo/logo.png') }}" alt="company logo" height="100" width="150">
-      </a>
-      <ul class="navbar-nav col-lg-6 justify-content-lg-center">
-        <li class="nav-item">
-          <a class="nav-link active" href="#">{{ _('Home') }}</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="#">{{ _('Properties') }}</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="#">{{ _('Contact') }}</a>
-        </li>
-      </ul>
+  {% block content %}
+  <div class="container my-5 py-5">
+    <div class="row py-lg-5 my-2"></div>
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light">Album example</h1>
+      <p class="lead text-body-secondary">Something short and leading about the collection below—its contents, the
+        creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+      <p>
+        <a href="#" class="btn btn-primary my-2">Main call to action</a>
+        <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+      </p>
     </div>
-  </div>
-</nav>
-</div>
-    
-    <div class="container py-5 my-5">
 
-      <div class="row py-lg-5"></div>
-        <div class="col-lg-6 col-md-8 mx-auto">
-          <h1 class="fw-light">Album example</h1>
-          <p class="lead text-body-secondary">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
-          <p>
-            <a href="#" class="btn btn-primary my-2">Main call to action</a>
-            <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-          </p>
-        </div>
-      </div>
-
-    </div>
-    
     <div class="container">
-      <div class="album py-5 bg-body-tertiary rounded">
+      <div class="album py-5 bg-body-tertiary rounded mt-5">
         <div class="container">
           <div class="row row-cols-1 row-cols-sm-12 row-cols-md-3 g-3">
             <div class="col">
               <div class="card shadow-sm">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
+                  xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
+                  preserveAspectRatio="xMidYMid slice" focusable="false">
+                  <title>Placeholder</title>
+                  <rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef"
+                    dy=".3em">Thumbnail</text>
+                </svg>
                 <div class="card-body">
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                    additional
+                    content. This content is a little bit longer.</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
@@ -74,9 +43,17 @@
             </div>
             <div class="col">
               <div class="card shadow-sm">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
+                  xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
+                  preserveAspectRatio="xMidYMid slice" focusable="false">
+                  <title>Placeholder</title>
+                  <rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef"
+                    dy=".3em">Thumbnail</text>
+                </svg>
                 <div class="card-body">
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                    additional
+                    content. This content is a little bit longer.</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
@@ -89,9 +66,17 @@
             </div>
             <div class="col">
               <div class="card shadow-sm">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
+                  xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
+                  preserveAspectRatio="xMidYMid slice" focusable="false">
+                  <title>Placeholder</title>
+                  <rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef"
+                    dy=".3em">Thumbnail</text>
+                </svg>
                 <div class="card-body">
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                    additional
+                    content. This content is a little bit longer.</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
@@ -106,21 +91,8 @@
         </div>
       </div>
     </div>
-    <div class="container">
-      <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-        <p class="col-md-4 mb-0 text-body-secondary">© 2024 Deveni Invest, Ltd</p>
-    
-        <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-          <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-        </a>
-    
-        <ul class="nav col-md-4 justify-content-end">
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Properties</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Contact</a></li>
-        </ul>
-      </footer>
-    </div>
-      {{ bootstrap.load_js() }}
+  </div>
+  {% endblock %}
 </body>
-</html>
+
+{% include "footer.html" %}

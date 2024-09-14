@@ -38,13 +38,18 @@ def index():
     flash(gettext('Your post is now live!'))
     return render_template('index.html')
 
+@app.route("/login")
+def login():
+    form = AddPropertyForm()
+    return render_template("login.html", form=form)
+
 if __name__ == "__main__":
     app.run(debug=True, port=5005)
 
 #TODO
-# Create page to add or remove property
-# For the city can be free text
-# Figure out how to handle images
+# Create page to add or remove property Done
+# For the city can be free text Done
+# Figure out how to handle images On it
 # Maybe make a chatgpt agent that use all the available info to write a description
 #TODO
 # Create a database to store the property information

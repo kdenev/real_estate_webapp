@@ -1,0 +1,13 @@
+{% from "bootstrap5/form.html" import render_form %}
+{% include "header.html" %}
+
+{% block content %}
+
+
+<div class="container" id="form">
+      {{render_form(form)}}
+</div> 
+
+{% endblock %}
+
+{% include "footer.html" %}

@@ -13,9 +13,9 @@ class AddPropertyForm(FlaskForm):
     price = IntegerField(_("Price"), validators=[DataRequired()])
     currency = SelectField(_("Property Type"), validators=[DataRequired()], choices=CURRENCY_CHOICES)
     city_lantin = StringField(_("City"), validators=[DataRequired()])
-    city_cyrillic = IntegerField(_("City Cyrillic"), validators=[DataRequired()])
-    area_lantin = IntegerField(_("Area Latin"), validators=[DataRequired()])
-    area_cyrillic = IntegerField(_("Area Cyrillic"), validators=[DataRequired()])
+    city_cyrillic = StringField(_("City Cyrillic"), validators=[DataRequired()])
+    area_lantin = StringField(_("District Latin"), validators=[DataRequired()])
+    area_cyrillic = StringField(_("District Cyrillic"), validators=[DataRequired()])
     type = SelectField(_("Property Type"), validators=[DataRequired()], choices=TYPE_CHOICES)
     size = IntegerField(_("Size"), validators=[DataRequired()])
     bedrooms = IntegerField(_("Bedrooms"))
@@ -23,7 +23,8 @@ class AddPropertyForm(FlaskForm):
     description_en = CKEditorField(_("Description English"))
     description_bg = CKEditorField(_("Description Bulgarian"), validators=[DataRequired()])
     description_ru = CKEditorField(_("Description Russian"))
-    pics = FileField(_("Pictures"))
+    pics = FileField(_("Pictures"), render_kw={"multiple": True})
+    upload_pics = SubmitField(_("Upload Pictures"))
     submit = SubmitField(_("Add property"))
 
 
