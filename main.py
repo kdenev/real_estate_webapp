@@ -8,39 +8,54 @@ from sqlalchemy.orm import relationship, DeclarativeBase, Mapped, mapped_column
 from sqlalchemy import Integer, String, Text
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
 import os
 from dotenv import load_dotenv
 # Optional: add contact me email functionality (Day 60)
 # import smtplib
 from flask_babel import Babel
 from flask_babel import _, gettext
-from forms import AddPropertyForm, LoginForm
+from forms import AddPropertyForm, LoginForm, TestForm
 
 # Load environment variables
 load_dotenv()
 
-
 def get_locale():
-    print(os.environ.get('LANGUAGES'))
+    # print(os.environ.get('LANGUAGES'))
     # return request.accept_languages.best_match(['en', 'bg'])
     return 'en'
 
+
+# Flask app
 app = Flask(__name__)
 babel = Babel(app, locale_selector=get_locale)
 # app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 app.config['SECRET_KEY'] = 'secret'
+app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.gif', '.jpeg']
+app.config['UPLOAD_PATH'] = 'uploads'
+
+
 ckeditor = CKEditor(app)
 Bootstrap5(app)
 
 
 @app.route("/")
 def index():
-    flash(gettext('Your post is now live!'))
     return render_template('index.html')
 
-@app.route("/login")
+@app.route("/login", methods=['POST', 'GET'])
 def login():
-    form = AddPropertyForm()
+    form = TestForm()
+    if form.validate_on_submit():
+        print(form.pics.data)
+        for p in form.pics.data:
+            print(p.filename)
+            filename = secure_filename(p.filename)
+            if filename != '':
+                file_ext = os.path.splitext(filename)[1]
+                if file_ext not in app.config['UPLOAD_EXTENSIONS']:
+                    abort(400)
+                p.save(os.path.join(app.config['UPLOAD_PATH'], filename))
     return render_template("login.html", form=form)
 
 if __name__ == "__main__":

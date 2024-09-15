@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, PasswordField, IntegerField, SelectField, FileField
+from wtforms import StringField, SubmitField, PasswordField, IntegerField, SelectField, MultipleFileField
 from wtforms.validators import DataRequired
 from flask_ckeditor import CKEditorField
 from flask_babel import _
@@ -8,10 +8,10 @@ from flask_babel import _
 TYPE_CHOICES = [('a', _('Apartment')), ('h', _('House')), ('p', _('Plot'))]
 CURRENCY_CHOICES = [('eur', 'EUR'), ('usd', 'USD'), ('bgn', 'BGN')]
 
-# WTForm for creating a blog post
+# WTForm for creating a property add
 class AddPropertyForm(FlaskForm):
     price = IntegerField(_("Price"), validators=[DataRequired()])
-    currency = SelectField(_("Property Type"), validators=[DataRequired()], choices=CURRENCY_CHOICES)
+    currency = SelectField(_("Currency"), validators=[DataRequired()], choices=CURRENCY_CHOICES)
     city_lantin = StringField(_("City"), validators=[DataRequired()])
     city_cyrillic = StringField(_("City Cyrillic"), validators=[DataRequired()])
     area_lantin = StringField(_("District Latin"), validators=[DataRequired()])
@@ -23,7 +23,7 @@ class AddPropertyForm(FlaskForm):
     description_en = CKEditorField(_("Description English"))
     description_bg = CKEditorField(_("Description Bulgarian"), validators=[DataRequired()])
     description_ru = CKEditorField(_("Description Russian"))
-    pics = FileField(_("Pictures"), render_kw={"multiple": True})
+    pics = MultipleFileField(_("Pictures"), render_kw={"multiple": True})
     upload_pics = SubmitField(_("Upload Pictures"))
     submit = SubmitField(_("Add property"))
 
@@ -33,3 +33,8 @@ class LoginForm(FlaskForm):
     username = StringField(_("Username"), validators=[DataRequired()])
     password = PasswordField(_("Password"), validators=[DataRequired()])
     submit = SubmitField(_("Login"))
+
+# WTForm for creating a blog post
+class TestForm(FlaskForm):
+    pics = MultipleFileField(_("Pictures"))
+    upload_pics = SubmitField(_("Upload Pictures"))
