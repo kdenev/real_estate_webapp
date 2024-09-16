@@ -1,0 +1,21 @@
+{% from "bootstrap5/form.html" import render_form %}
+{% include "header.html" %}
+
+{% block content %}
+
+<main class="mb-4">
+    <div class="container py-5 my-5">
+      <div class="row py-5 my-5">
+        <div class="col-lg-8 col-md-10 mx-auto">
+        <!--Rendering the registration form here-->
+        <form method="post">
+            {{ render_form(form) }}
+        </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  {% endblock %}
+
+  {% include "footer.html" %}

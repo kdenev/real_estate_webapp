@@ -34,7 +34,9 @@ class LoginForm(FlaskForm):
     password = PasswordField(_("Password"), validators=[DataRequired()])
     submit = SubmitField(_("Login"))
 
-# WTForm for creating a blog post
-class TestForm(FlaskForm):
-    pics = MultipleFileField(_("Pictures"))
-    upload_pics = SubmitField(_("Upload Pictures"))
+# Create a form to register new users
+class RegisterForm(FlaskForm):
+    email = StringField("Email", validators=[DataRequired()])
+    password = PasswordField("Password", validators=[DataRequired()])
+    name = StringField("Name", validators=[DataRequired()])
+    submit = SubmitField("Sign Me Up!")

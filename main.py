@@ -15,7 +15,10 @@ from dotenv import load_dotenv
 # import smtplib
 from flask_babel import Babel
 from flask_babel import _, gettext
-from forms import AddPropertyForm, LoginForm, TestForm
+
+from forms import *
+from functions import *
+from databases import *
 
 # Load environment variables
 load_dotenv()
@@ -31,31 +34,59 @@ app = Flask(__name__)
 babel = Babel(app, locale_selector=get_locale)
 # app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 app.config['SECRET_KEY'] = 'secret'
-app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.gif', '.jpeg']
-app.config['UPLOAD_PATH'] = 'uploads'
-
+app.config['UPLOAD_EXTENSIONS'] = UPLOAD_EXTENSIONS
+app.config['UPLOAD_PATH'] = UPLOAD_PATH
 
 ckeditor = CKEditor(app)
 Bootstrap5(app)
 
+# DATA
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI')
+db.init_app(app)
+
+with app.app_context():
+    db.create_all()
 
 @app.route("/")
 def index():
     return render_template('index.html')
 
+@app.route("/register", methods=['POST', 'GET'])
+def register():
+    form = RegisterForm()
+    if form.validate_on_submit():
+
+        # Check if user email is already present in the database.
+        result = db.session.execute(db.select(User).where(User.email == form.email.data))
+        user = result.scalar()
+        if user:
+            # User already exists
+            flash("You've already signed up with that email, log in instead!")
+            return redirect(url_for('login'))
+
+        hash_and_salted_password = generate_password_hash(
+            form.password.data,
+            method='pbkdf2:sha256',
+            salt_length=8
+        )
+        new_user = User(
+            email=form.email.data,
+            name=form.name.data,
+            password=hash_and_salted_password,
+        )
+        db.session.add(new_user)
+        db.session.commit()
+        # This line will authenticate the user with Flask-Login
+        # login_user(new_user)
+        # return redirect(url_for("get_all_posts"))
+    return render_template("register.html", form=form)#, current_user=current_user)
+
 @app.route("/login", methods=['POST', 'GET'])
 def login():
-    form = TestForm()
+    form = AddPropertyForm()
     if form.validate_on_submit():
         print(form.pics.data)
-        for p in form.pics.data:
-            print(p.filename)
-            filename = secure_filename(p.filename)
-            if filename != '':
-                file_ext = os.path.splitext(filename)[1]
-                if file_ext not in app.config['UPLOAD_EXTENSIONS']:
-                    abort(400)
-                p.save(os.path.join(app.config['UPLOAD_PATH'], filename))
+        save_pics(form.pics.data)
     return render_template("login.html", form=form)
 
 if __name__ == "__main__":
@@ -64,10 +95,10 @@ if __name__ == "__main__":
 #TODO
 # Create page to add or remove property Done
 # For the city can be free text Done
-# Figure out how to handle images On it
+# Figure out how to handle images On it Done
 # Maybe make a chatgpt agent that use all the available info to write a description
 #TODO
-# Create a database to store the property information
+# Create a database to store the property information 
 #TODO
 # Add a button to change the language
 #TODO
