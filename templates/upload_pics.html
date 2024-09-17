@@ -1,0 +1,25 @@
+{% from "bootstrap5/form.html" import render_form %}
+{% include "header.html" %}
+
+{% block content %}
+
+
+<div class="container">
+      <form method="POST" id="form"  enctype="multipart/form-data">
+            {{render_form(upload_pics_form)}}
+      </form>
+</div> 
+
+<div class="container">
+      {% if filename_list|length > 0 %}
+            {% for pic in filename_list %}
+                        <img src="{{pic}}" alt="" width="200" height="200">
+            {% endfor %}
+      {% else %}
+            <h1>NO!</h1>
+      {% endif %}
+</div>
+
+{% endblock %}
+
+{% include "footer.html" %}

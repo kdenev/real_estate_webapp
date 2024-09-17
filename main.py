@@ -81,13 +81,14 @@ def register():
         # return redirect(url_for("get_all_posts"))
     return render_template("register.html", form=form)#, current_user=current_user)
 
-@app.route("/login", methods=['POST', 'GET'])
-def login():
-    form = AddPropertyForm()
-    if form.validate_on_submit():
-        print(form.pics.data)
-        save_pics(form.pics.data)
-    return render_template("login.html", form=form)
+@app.route("/upload_pics", methods=['POST', 'GET'])
+def upload_pics():
+    filename_list = list()
+    # add_property_form = AddPropertyForm()
+    upload_pics_form = UploadPicsForm()
+    if upload_pics_form.validate_on_submit():
+        filename_list = save_pics(upload_pics_form.pics.data)
+    return render_template("upload_pics.html", upload_pics_form=upload_pics_form, filename_list = filename_list)
 
 if __name__ == "__main__":
     app.run(debug=True, port=5005)
@@ -98,7 +99,7 @@ if __name__ == "__main__":
 # Figure out how to handle images On it Done
 # Maybe make a chatgpt agent that use all the available info to write a description
 #TODO
-# Create a database to store the property information 
+# Create a database to store the property information Done
 #TODO
 # Add a button to change the language
 #TODO

@@ -23,8 +23,6 @@ class AddPropertyForm(FlaskForm):
     description_en = CKEditorField(_("Description English"))
     description_bg = CKEditorField(_("Description Bulgarian"), validators=[DataRequired()])
     description_ru = CKEditorField(_("Description Russian"))
-    pics = MultipleFileField(_("Pictures"), render_kw={"multiple": True})
-    upload_pics = SubmitField(_("Upload Pictures"))
     submit = SubmitField(_("Add property"))
 
 
@@ -40,3 +38,8 @@ class RegisterForm(FlaskForm):
     password = PasswordField("Password", validators=[DataRequired()])
     name = StringField("Name", validators=[DataRequired()])
     submit = SubmitField("Sign Me Up!")
+
+# WTForm for uploading pictures
+class UploadPicsForm(FlaskForm):
+    pics = MultipleFileField(_("Pictures"), render_kw={"multiple": True})
+    upload_pics = SubmitField(_("Upload Pictures"))
