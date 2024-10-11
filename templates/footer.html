@@ -14,3 +14,14 @@
     </footer>
   </div>
   {{ bootstrap.load_js() }}
+  <script>
+    var el = document.getElementById('sortable');
+    new Sortable(el, {
+        animation: 150,
+        ghostClass: 'sortable-ghost',
+        // onEnd: function(evt) {
+        //     console.log("Sorting stopped!");
+        // }
+    });
+</script>
+</script>

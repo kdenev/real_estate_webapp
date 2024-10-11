@@ -17,6 +17,22 @@
     columns: 2;
 }
 
+ul#sortable {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+    gap: 10px;
+    list-style-position: inside; /* Keeps numbers aligned inside grid cells */
+    padding: 0;
+    margin: 0;
+}
+
+ul#sortable li {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border: 1px solid #ccc;
+    text-align: center;
+    cursor: move; /* Indicates sortable items */
+}
 /* #navbar {
     background-color:#990000;
     position:fixed;  

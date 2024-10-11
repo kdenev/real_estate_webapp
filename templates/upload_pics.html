@@ -5,18 +5,20 @@
 
 
 <div class="container">
-      <form method="POST" id="form"  enctype="multipart/form-data">
+      <form method="POST" id="form" enctype="multipart/form-data">
             {{render_form(upload_pics_form)}}
       </form>
-</div> 
+</div>
 
 <div class="container">
       {% if filename_list|length > 0 %}
+      <ul id="sortable">
             {% for pic in filename_list %}
-                        <img src="{{pic}}" alt="" width="200" height="200">
+            <li data-id="{{ loop.index }}">
+                  <img src="{{pic}}" alt="" width="200" height="200">
+            </li>
             {% endfor %}
-      {% else %}
-            <h1>NO!</h1>
+      </ul>
       {% endif %}
 </div>
 
